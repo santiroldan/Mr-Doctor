@@ -1,9 +1,0 @@
-<h1>{{page_title}}</h1>
-<hr>
-<div class="loading text-center" *ngIf="!posts">
-    <img src="../../../assets/loading.gif" alt="Loading"/>
-</div>
-<div class="alert alert-warning" *ngIf="posts && posts.length == 0">
-    No hay entradas que mostrar en esta categoria ...
-</div>
-<post-list [posts]="posts" [identity]="identity" [url]="url" [token]="token"></post-list>
