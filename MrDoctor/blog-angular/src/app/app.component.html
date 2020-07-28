@@ -1,0 +1,203 @@
+<nav class="navbar sticky-top navbar-expand-lg pl-5 pr-5" (window:scroll)="scrollNavbar();" data-toggle="collapse" data-target="#navbarSupportedContent" *ngIf="categories"> <!-- Barra Navegación -->
+  <a class="btn-inicio ml-3" style="color:white" [routerLink]="['/inicio']">
+    <i class="fa fa-heartbeat fa-2x" style="color: red;"></i>
+    {{page_title}}
+  </a>
+  <ul class="dropdown nav menu-responsive mt-4">
+    <li class="nav-item menu-trigger dropdown">
+      <a class="d-flex" role="button" id="menuDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <p class="ml-3 mr-1">Menú</p>
+        <span>
+          <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </span>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-left ml-3" aria-labelledby="menuDropdown">
+        <li class="nav-item active">
+          <a class="dropdown-item text-left pl-4" [routerLink]="['/inicio']">
+            <span class="mr-2"><i class="fa fa-home" aria-hidden="true"></i></span>Inicio
+          </a>
+        </li>
+        <li class="nav-item" *ngFor="let category of categories">
+            <a class="dropdown-item text-left pl-4" [routerLink]="['categoria/', category.id]">
+              <span class="mr-2">
+                <i class="fa fa-heart" aria-hidden="true" *ngIf="category.name==='Cardiología'"></i>
+                <i class="fa fa-male" aria-hidden="true" *ngIf="category.name==='Endocrinología'"></i>
+                <i class="fa fa-plus-square" aria-hidden="true" *ngIf="category.name==='Oncología'"></i>
+                <i class="fa fa-wheelchair" aria-hidden="true" *ngIf="category.name==='Hematología'"></i>
+                <i class="fa fa-user" aria-hidden="true" *ngIf="category.name==='Neurología'"></i>
+                <i class="fa fa-user-md" aria-hidden="true" *ngIf="category.name==='Psiquiatría'"></i>
+              </span>
+              {{category.name}}
+            </a>
+        </li>
+        <div *ngIf="!identity">
+          <li class="dropdown-divider"></li>
+          <li class="nav-item">
+            <a class="dropdown-item text-left pl-4" [routerLink]="['/login']">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="dropdown-item text-left pl-4" [routerLink]="['/registro']">Registrate</a>
+          </li>
+        </div>
+      </ul>
+    </li>
+  </ul>
+  <ul class="nav menu-top ml-3 mt-4">
+    <li class="nav-item active">
+      <a class="nav-link d-flex" [routerLink]="['/inicio']" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}">
+        <span class="mr-2"><i class="fa fa-home" aria-hidden="true"></i></span>
+        <p>Inicio</p>
+      </a>
+    </li>
+    <li class="nav-item" *ngFor="let category of categories">
+      <a class="nav-link d-flex" [routerLink]="['categoria/', category.id]" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}">
+        <span class="mr-2">
+          <i class="fa fa-heart" aria-hidden="true" *ngIf="category.name==='Cardiología'"></i>
+          <i class="fa fa-male" aria-hidden="true" *ngIf="category.name==='Endocrinología'"></i>
+          <i class="fa fa-plus-square" aria-hidden="true" *ngIf="category.name==='Oncología'"></i>
+          <i class="fa fa-wheelchair" aria-hidden="true" *ngIf="category.name==='Hematología'"></i>
+          <i class="fa fa-user" aria-hidden="true" *ngIf="category.name==='Neurología'"></i>
+          <i class="fa fa-user-md" aria-hidden="true" *ngIf="category.name==='Psiquiatría'"></i>
+        </span>
+        <p>{{category.name}}</p>
+      </a>
+    </li>
+  </ul>
+  <ul class="dropdown mi_perfil mt-3 ml-auto">
+    <li class="nav-item avatar_mask dropdown-toggle fl" *ngIf="identity && identity.image" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <img src="{{this.url + 'user/avatar/' + identity.image}}" title="{{identity.name + ' ' + identity.surname}}" />
+      <i class="fa fa-caret-down" aria-hidden="true"></i>
+    </li>
+    <li class="dropdown-menu dropdown-menu-right" *ngIf="identity" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" [routerLink]="['/crear-entrada']">
+        <svg class="bi bi-file-text mr-2" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M4 1h8a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V3a2 2 0 012-2zm0 1a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V3a1 1 0 00-1-1H4z" clip-rule="evenodd"/>
+          <path fill-rule="evenodd" d="M4.5 10.5A.5.5 0 015 10h3a.5.5 0 010 1H5a.5.5 0 01-.5-.5zm0-2A.5.5 0 015 8h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5zm0-2A.5.5 0 015 6h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5zm0-2A.5.5 0 015 4h6a.5.5 0 010 1H5a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+        </svg>
+        Crear entrada
+      </a>
+      <a class="dropdown-item" [routerLink]="['/crear-categoria']">
+        <svg class="bi bi-file-post mr-2" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M4 1h8a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V3a2 2 0 012-2zm0 1a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V3a1 1 0 00-1-1H4z" clip-rule="evenodd"/>
+          <path d="M4 5.5a.5.5 0 01.5-.5h7a.5.5 0 01.5.5v7a.5.5 0 01-.5.5h-7a.5.5 0 01-.5-.5v-7z"/>
+          <path fill-rule="evenodd" d="M4 3.5a.5.5 0 01.5-.5h5a.5.5 0 010 1h-5a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+        </svg>
+        Crear categoria
+      </a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" [routerLink]="['/perfil']">
+        <svg class="bi bi-person-bounding-box mr-2" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M1.5 1a.5.5 0 00-.5.5v3a.5.5 0 01-1 0v-3A1.5 1.5 0 011.5 0h3a.5.5 0 010 1h-3zM11 .5a.5.5 0 01.5-.5h3A1.5 1.5 0 0116 1.5v3a.5.5 0 01-1 0v-3a.5.5 0 00-.5-.5h-3a.5.5 0 01-.5-.5zM.5 11a.5.5 0 01.5.5v3a.5.5 0 00.5.5h3a.5.5 0 010 1h-3A1.5 1.5 0 010 14.5v-3a.5.5 0 01.5-.5zm15 0a.5.5 0 01.5.5v3a1.5 1.5 0 01-1.5 1.5h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+          <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+        </svg>
+        Mi perfil
+      </a>
+      <a class="dropdown-item" [routerLink]="['/mis-publicaciones', identity.sub]">
+        <svg class="bi bi-archive mr-2" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M2 5v7.5c0 .864.642 1.5 1.357 1.5h9.286c.715 0 1.357-.636 1.357-1.5V5h1v7.5c0 1.345-1.021 2.5-2.357 2.5H3.357C2.021 15 1 13.845 1 12.5V5h1z" clip-rule="evenodd"/>
+          <path fill-rule="evenodd" d="M5.5 7.5A.5.5 0 016 7h4a.5.5 0 010 1H6a.5.5 0 01-.5-.5zM15 2H1v2h14V2zM1 1a1 1 0 00-1 1v2a1 1 0 001 1h14a1 1 0 001-1V2a1 1 0 00-1-1H1z" clip-rule="evenodd"/>
+        </svg>
+        Mis publicaciones
+      </a>
+      <a class="dropdown-item" [routerLink]="['/logout/1']">
+        <svg class="bi bi-power mr-2" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M5.578 4.437a5 5 0 104.922.044l.5-.866a6 6 0 11-5.908-.053l.486.875z" clip-rule="evenodd"/>
+          <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z" clip-rule="evenodd"/>
+        </svg>
+        Cerrar sesión
+      </a>
+    </li>
+    <li class="nav-item avatar_mask2 dropdown-toggle fl" *ngIf="!identity || identity && !identity.image" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fa fa-user-circle fa-2x" aria-hidden="true" title="Identificate"></i>
+    </li>
+    <li class="dropdown-menu dropdown-menu-right" *ngIf="!identity" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" [routerLink]="['/login']">
+        <svg class="bi bi-person-fill mr-2" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+        </svg>
+        Login
+      </a>
+      <a class="dropdown-item" [routerLink]="['/registro']">
+        <svg class="bi bi-person-plus-fill mr-2" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7.5-3a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13V5.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+          <path fill-rule="evenodd" d="M13 7.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z" clip-rule="evenodd"/>
+        </svg>
+        Registrate
+      </a>
+    </li>
+  </ul>
+</nav> <!-- Cierra Barra Navegación -->
+
+<div class="container contenedor_principal col-sm-10 p-5 mb-5"> <!-- Contenedor Principal -->
+  <!-- Contenido -->
+  <router-outlet></router-outlet> <!-- IMPORTANTE: Etiqueta de ruta-->
+</div> <!-- Cierra Contenedor Principal -->
+
+<!-- Boton ir arriba-->
+<button [ngClass]="'no-hidden'" *ngIf="ver_btn_arriba" class="btn" (click)="scrollTop()">
+  <svg class="bi bi-arrow-up-short" width="1.5em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" d="M8 5.5a.5.5 0 01.5.5v5a.5.5 0 01-1 0V6a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+    <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l3 3a.5.5 0 01-.708.708L8 5.707 5.354 8.354a.5.5 0 11-.708-.708l3-3z" clip-rule="evenodd"/>
+  </svg>
+</button>
+
+<!-- Footer -->
+<footer class="page-footer font-small pt-4">
+<!-- Footer Links -->
+  <div class="text-center mb-2">
+    <a class="btn-inicio ml-3" style="color:white" [routerLink]="['/inicio']">
+      <i class="fa fa-heartbeat fa-2x" style="color: red;"></i>
+      {{page_title}}
+    </a>
+  </div>
+  <div class="text-center">
+    <a href="#">Política de privacidad</a>
+    <a href="#" class="ml-3">Política de cookies</a>
+    <a href="#" class="ml-3">Privacidad en U.E</a>
+    <a href="#" class="ml-3">Ayuda</a>
+    <a href="#" class="ml-3">Acerca de Mr.Doctor</a>
+  </div>
+  <hr>
+  <!-- Call to action -->
+  <ul class="list-unstyled list-inline text-center py-2" *ngIf="!identity">
+    <li class="list-inline-item">
+      <h5 class="mb-1">¿Aún no lo has probado?</h5>
+    </li>
+    <li class="list-inline-item">
+      <a href="#!" class="btn btn-danger btn-rounded">Registrate!</a>
+    </li>
+  </ul>
+  <hr *ngIf="!identity">
+  <!-- Social buttons -->
+  <ul class="list-unstyled list-inline text-center">
+    <li class="list-inline-item">
+      <a class="btn-floating btn-fb mx-1" title="Facebook">
+        <i class="fa fa-facebook-f"> </i>
+      </a>
+    </li>
+    <li class="list-inline-item">
+      <a class="btn-floating btn-tw mx-1" title="Twitter">
+        <i class="fa fa-twitter"> </i>
+      </a>
+    </li>
+    <li class="list-inline-item">
+      <a class="btn-floating btn-gplus mx-1" title="Google +">
+        <i class="fa fa-google-plus"> </i>
+      </a>
+    </li>
+    <li class="list-inline-item">
+      <a class="btn-floating btn-li mx-1" title="LinkedIn">
+        <i class="fa fa-linkedin"> </i>
+      </a>
+    </li>
+    <li class="list-inline-item">
+      <a class="btn-floating btn-dribbble mx-1" title="Dribbble">
+        <i class="fa fa-dribbble"> </i>
+      </a>
+    </li>
+  </ul>
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">
+    © Mr.Doctor. Todos los derechos reservados.
+  </div>
+</footer>

@@ -1,0 +1,49 @@
+<div class="form-group">
+    <h1>{{page_title}}</h1>
+</div>
+<hr>      
+<!-- Formulario de Nueva/Edición Entrada -->
+<form class="pl-3 w-50" [ngStyle]="{'border-left': '3px solid #030e2a'}" #postNewForm="ngForm" (ngSubmit)="onSubmit(postNewForm)">
+    <div class="alert alert-success" *ngIf="status == 'success'">
+        Entrada creada correctamente.
+    </div>
+    <div class= "alert alert-danger" *ngIf="status == 'error'">
+        Error: entrada no creada, vuelve a intentarlo más tarde.
+    </div>
+    <div class="form-group mt-5">
+        <label [ngStyle]="{'font-weight': '500'}" for="name" class="control-label">Titulo</label>
+        <input type="text" name="title" class="form-control" #title="ngModel" [(ngModel)]="post.title" placeholder="Ejemplo: Combatir al Coronavirus" required/>
+        <small *ngIf="!title.valid && title.touched" class="invalid-feedback d-block">
+            El titulo no es válido
+        </small>
+    </div>
+    <div class="form-group mt-5">
+        <label [ngStyle]="{'font-weight': '500'}" for="content">Contenido</label>
+        <textarea name="content" [froalaEditor]="froala_options" #content="ngModel" [(ngModel)]="post.content"  required></textarea>
+        <small *ngIf="!content.valid && content.touched" class="invalid-feedback d-block">
+            El contenido no es válido
+        </small>
+    </div>
+    <div class="form-group mt-5">
+        <label [ngStyle]="{'font-weight': '500'}" for="category_id">Categoría</label>
+        <select class="form-control" name="category_id" #category="ngModel" [(ngModel)]="post.category_id">
+            <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
+        </select>
+    </div>
+    <div class="form-group mt-5">
+        <label [ngStyle]="{'font-weight': '500'}" for="image">Imagen</label>
+        <div>
+            <div class="float-left mr-2" *ngIf="post.image">
+                <img [ngStyle]="{'width': '150px', 'height': '100px'}" src="{{this.url + 'post/image/' + post.image}}" />
+            </div>
+            <div [ngStyle]="{'padding-top': '30px'}">
+                <angular-file-uploader [config]="afuConfig" (ApiResponse)="imageUpload($event)"></angular-file-uploader>
+            </div>
+            <div class="clearfix"></div>
+        </div> 
+    </div>
+    <div class="form-group mt-5">
+        <input type="submit" value="Publicar" class="btn btn-success col-md-3" [ngStyle]="{'border-radius': '20px'}" [disabled]="postNewForm.invalid"/>
+    </div>
+</form>
+
