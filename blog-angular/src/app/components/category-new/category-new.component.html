@@ -1,0 +1,23 @@
+<div class="form-group">
+    <h1>{{page_title}}</h1>
+</div>
+<hr>      
+<!-- Formulario para crear catergoria -->
+<form class="pl-3 w-50" [ngStyle]="{'border-left': '3px solid #030e2a'}" #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)">
+    <div class="alert alert-success" *ngIf="status == 'success'">
+        La categoría se ha creado correctamente.
+    </div>
+    <div class= "alert alert-danger" *ngIf="status == 'error'">
+        Error: La categoría no se ha creado, vuelve a intentarlo más tarde.
+    </div>
+    <div class="form-group mt-5">
+        <label [ngStyle]="{'font-weight': '500'}" for="name">Categoría</label>
+        <input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="category.name" placeholder="Ejemplo: Coronavirus" required/>
+        <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+            El nombre introducido para la categoría no es válido
+        </small>
+    </div>
+    <div class="form-group mt-5">
+        <input type="submit" value="Crear Categoria" class="btn btn-success col-md-3" [ngStyle]="{'border-radius': '20px'}" [disabled]="categoryForm.invalid"/>
+    </div>
+</form>

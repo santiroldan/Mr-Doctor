@@ -1,0 +1,10 @@
+.avatar_edit{
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50px;
+}
+
+.avatar_edit img{
+    height: 50px;
+}

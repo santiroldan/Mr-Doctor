@@ -1,0 +1,332 @@
+/*Google Fonts*/
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Rock+Salt&family=Roboto&family=Poppins&family=Roboto+Condensed&family=Roboto+Mono:wght@500&display=swap');
+
+/* Etiquetas globales */
+body{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    /*background-color: purple; /* For browsers that do not support gradients */
+    /*background-image: linear-gradient(black, purple);*/
+    
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,121,86,1) 60%, rgba(0,212,255,1) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+nav{
+    width: 100%;
+}
+
+p{
+    font-size: 14px;
+    
+}
+
+ul{
+    list-style: none;
+}
+
+/*App.component*/
+.contenedor_principal{
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+}
+
+.menu-trigger{
+    cursor: pointer;
+}
+
+.menu-trigger p{
+    text-transform: uppercase;
+    letter-spacing: 1.42px;
+}
+
+.menu-top li a p::after{
+    display: block !important;
+    letter-spacing: 1.42px;
+    text-transform: uppercase;
+    content: '';
+    border-bottom: solid 3px currentColor;  
+    transform: scaleX(0);  
+    transition: transform 250ms ease-in-out;
+}
+
+.menu-top li a:hover p::after{
+    transform: scaleX(1);
+}
+
+.navbar{
+    padding: 0 !important;
+}
+
+.scroll-navbar{
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9) !important;
+    animation: expand 1s;
+}
+
+@keyframes expand{
+    0%{top:-10px;}
+    100%{top:0px;}
+}
+
+.btn-inicio{
+    background-color: transparent !important;
+    border: none;
+    font-weight: bold;
+    font-size: 1.2em;
+    outline: none !important;
+    font-family: 'Rock Salt', cursive;
+    text-decoration: none !important;
+}
+
+.activo, .activo:hover, .menu-trigger{
+    background-color: transparent;
+    color: white !important;
+}
+
+.nav-link, .profile, .dropdown-menu p{
+    background-color: transparent;
+    color: lightgray;
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
+.profile:hover, article:hover .link_post, footer a:hover, .dropdown-item:hover{
+    color: lightgray !important;
+    text-decoration: none;
+}
+
+.nav-link:hover, .dropdown-menu p:hover{
+    color: #bfbfbf;
+}
+
+.btn-floating:hover{
+    color: lightgray !important;
+    cursor: pointer;
+}
+
+.avatar_mask{
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50px;
+    float: left;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.avatar_mask img{
+    height: 40px;
+}
+
+.avatar_mask2{
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    float: left;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.avatar_mask2 i{
+    color: lightgray;
+}
+
+.avatar_mask2 i:hover{
+    color: white;
+}
+
+.mi_perfil{
+    right: 0;
+}
+
+.dropdown-menu{
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    margin: 0px !important;
+    padding: 10px 0 !important;
+}
+
+.dropdown-menu li{
+    text-align: left;
+}
+
+.dropdown-item:hover{
+    background: #020124 !important;
+    color: white !important;
+}
+
+.menu-responsive{
+    display: none !important;
+}
+
+/*Responsive*/
+@media screen and (max-width: 780px){
+    .menu-responsive{
+        display: block !important;
+    }
+    .menu-top{
+        display: none !important;
+    }
+
+    .card-columns{
+        column-count: 1 !important;
+    }
+
+    #esconder_texto{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1300px) and (max-width: 1400px){
+    .card-columns{
+        column-count: 3 !important;
+    }
+}
+
+@media screen and ( min-width: 780px) and (max-width: 1300px){
+    .menu-top p{
+     display: none !important;   
+    }
+
+    .menu-top i{
+        margin-bottom: 1rem;
+    }
+
+    .card-columns{
+        column-count: 2 !important;
+    }
+
+    #esconder_texto{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1500px){
+    .card-columns{
+        column-count: 4 !important;
+    }
+}
+
+/* Post List */
+article{
+    border-radius: 20px !important;
+    border: 1px solid black !important;
+    outline:none;
+}
+
+article:hover{
+    transition: all 500ms;
+    transform: scale(1.03);
+    z-index: 2;
+}
+
+.container{
+ min-height: 900px !important;
+}
+
+.card-body{
+    padding-bottom: 20em !important;
+    cursor: pointer;
+}
+
+.card-body a{
+    line-height: 20px;
+}
+
+.card-columns{
+    transition: all 1.3s;
+}
+
+.ribbon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding: 3px 18px;
+    color: #fff;
+    font-size: 12px;
+    font-family: "Roboto",Arial,helvetica;
+    text-transform: uppercase;
+    width: auto;
+    font-weight: normal;
+    background-color: black;
+    border-color: transparent !important;
+    border-radius: 20px 0 20px 0;
+    font-size: 10px;
+}
+
+.loading img{
+    margin-top: 200px;
+    height: 100px;
+}
+
+.link_post{
+    color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: left;
+    font-size: 1.2rem;
+    font-family: "Roboto", sans-serif;
+    padding: 20px;
+    width: 100%;
+}
+
+.post-image{
+    height: 200px;
+    overflow: hidden;
+}
+
+/*Post Detail*/
+.show-post::first-letter { 
+    text-transform: capitalize !important;
+    font-weight: 500 !important;
+    font-size: 2em;
+}
+
+.show-post {
+    white-space: pre-wrap; 
+    text-align: justify;
+    width: auto; 
+    font-family: 'Poppins'; 
+    font-size: 1.0625rem;
+}
+
+/*Footer*/
+footer{
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background-color: #3e4551;
+    /*background-color: #041c30;*/
+    color: white;
+}
+
+footer a{
+    color: white;
+    font-size: 12px;
+}
+
+.footer-copyright{
+    background-color: rgba(0,0,0,0.2);
+    color: rgba(255,255,255,0.6);
+}
+
+/*Boton ir top page*/
+.no-hidden{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    visibility: visible;
+    border-radius: 50% !important;
+    z-index: 3;
+    font-weight: bold;
+    background-color: black;
+    opacity: 0.8;
+    color: white;
+}
